@@ -11,8 +11,6 @@ billetRouter.post("/", (request, response) => {
 
     const billet = validateBillet.execute(code);
 
-    console.log(billet);
-
     return response.json(billet);
   } catch (err) {
     return response.status(400).json({ erro: err.message });
