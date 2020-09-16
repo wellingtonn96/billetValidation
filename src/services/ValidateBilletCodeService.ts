@@ -1,12 +1,17 @@
 import { formatedValue } from "../utils/formatedValue";
 
-function sumValues(charcters: string, mult: Array<number>): number {
+function validateField(
+  charcters: string,
+  initialMult: number,
+  dv: number
+): boolean {
   const sumValues = charcters
     .split("")
     .map((item) => {
       const value = parseInt(item);
-
-      return value;
+      const multValue = value * initialMult;
+      initialMult === 2 ? (initialMult = 1) : (initialMult = 2);
+      return multValue;
     })
     .reduce((prev, current) => {
       if (current >= 10) {
@@ -14,15 +19,14 @@ function sumValues(charcters: string, mult: Array<number>): number {
         const numTwo = parseInt(current.toString().substr(1, 1));
 
         const value = numOne + numTwo;
-        console.log(value);
+
         return prev + value;
       }
-      console.log(current);
 
       return prev + current;
     }, 0);
 
-  return sumValues;
+  return (sumValues % 10) + dv === 10 ? true : false;
 }
 
 class ValidateBilletCodeService {
@@ -31,15 +35,30 @@ class ValidateBilletCodeService {
       throw new Error("Billet code invalid!");
     }
 
-    const fieldOne = sumValues(code.substr(0, 9), [2, 1, 2, 1, 2, 1, 2, 1, 2]);
+    const dvFieldOne = parseInt(code.substr(9, 1));
+    const validateFieldOne = validateField(code.substr(0, 9), 2, dvFieldOne);
 
-    console.log(fieldOne);
+    if (!validateFieldOne) {
+      throw new Error("Billet code invalid!");
+    }
 
-    const dvFieldOne = code.substr(9, 1);
-    const fieldTwo = code.substr(10, 10);
-    const dvFieldTwo = code.substr(20, 1);
-    const fieldTree = code.substr(21, 10);
-    const dvFieldTree = code.substr(31, 1);
+    const dvFieldTwo = parseInt(code.substr(20, 1));
+    const validateFieldTwo = validateField(code.substr(10, 10), 1, dvFieldTwo);
+
+    if (!validateFieldTwo) {
+      throw new Error("Billet code invalid!");
+    }
+
+    const dvFieldTree = parseInt(code.substr(31, 1));
+    const validateFieldTree = validateField(
+      code.substr(21, 10),
+      1,
+      dvFieldTree
+    );
+
+    if (!validateFieldTree) {
+      throw new Error("Billet code invalid!");
+    }
 
     const value = code.substr(code.length - 10);
 
@@ -47,7 +66,7 @@ class ValidateBilletCodeService {
 
     const decimal = code.substr(code.length - 2);
 
-    const valueWithDot = firstEightNumbers + "." + decimal;
+    const valueWithDot = `${firstEightNumbers}.${decimal}`;
 
     const formatValue = formatedValue(valueWithDot);
 
