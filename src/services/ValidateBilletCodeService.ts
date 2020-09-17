@@ -1,8 +1,8 @@
-import { formatedValue } from "../utils/formatedValue";
+import { formattedValue } from "../utils/formattedValue";
 
 function validateField(
   charcters: string,
-  initialMult: number,
+  initialMult: 2 | 1,
   dv: number
 ): boolean {
   const sumValues = charcters
@@ -26,7 +26,28 @@ function validateField(
       return prev + current;
     }, 0);
 
+  console.log(sumValues);
+
+  console.log((sumValues % 10) + dv);
+
   return (sumValues % 10) + dv === 10 ? true : false;
+}
+
+function getDateWithNumberOfTheDays(numDays: number) {
+  const newdate = new Date(1997, 10, 7);
+
+  newdate.setDate(newdate.getDate() + numDays);
+
+  let dd = newdate.getDate();
+  let mm = newdate.getMonth();
+  let y = newdate.getFullYear();
+
+  if (mm === 0) {
+    mm = 12;
+    y = y - 1;
+  }
+
+  return `${dd}/${mm}/${y}`;
 }
 
 class ValidateBilletCodeService {
@@ -68,9 +89,14 @@ class ValidateBilletCodeService {
 
     const valueWithDot = `${firstEightNumbers}.${decimal}`;
 
-    const formatValue = formatedValue(valueWithDot);
+    const formatValue = formattedValue(valueWithDot);
+
+    const days = parseInt(code.substr(33, 4));
+
+    const dueDate = getDateWithNumberOfTheDays(days);
 
     return {
+      dueDate,
       value: formatValue,
       code,
     };
