@@ -26,9 +26,7 @@ function validateField(
       return prev + current;
     }, 0);
 
-  console.log(sumValues);
-
-  console.log((sumValues % 10) + dv);
+  if (sumValues % 10 === 0 && dv === 0) return true;
 
   return (sumValues % 10) + dv === 10 ? true : false;
 }
