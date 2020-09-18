@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import BilletController from "../controllers/BilletController";
+import BilletController from "../controllers/ValidationOfSlipsController";
 
 const billetController = new BilletController();
 

@@ -2,8 +2,8 @@ import { Router } from "express";
 
 const routes = Router();
 
-import billetRouter from "./billet.routes";
+import ValidationOfSlipsRouter from "./validationOfSlips.routes";
 
-routes.use("/billet", billetRouter);
+routes.use("/billet", ValidationOfSlipsRouter);
 
 export default routes;

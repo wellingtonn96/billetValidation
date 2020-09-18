@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import ValidateBilletCodeService from "../services/ValidateBilletCodeService";
+import ValidationOfSlipsService from "../services/ValidationOfSlipsService";
 
-class BilletController {
+class ValidationOfSlipsController {
   public create(request: Request, response: Response) {
     try {
       const { code } = request.body;
 
-      const validateBillet = new ValidateBilletCodeService();
+      const validateBillet = new ValidationOfSlipsService();
 
       const billet = validateBillet.execute(code);
 
@@ -17,4 +17,4 @@ class BilletController {
   }
 }
 
-export default BilletController;
+export default ValidationOfSlipsController;

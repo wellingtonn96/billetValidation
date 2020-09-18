@@ -48,7 +48,7 @@ function getDueDate(numDays: number) {
   return `${dd}/${mm}/${y}`;
 }
 
-class ValidateBilletCodeService {
+class ValidationOfSlipsService {
   public execute(code: string) {
     const dvFieldOne = parseInt(code.substr(9, 1));
     const validateFieldOne = validateField(code.substr(0, 9), 2, dvFieldOne);
@@ -68,14 +68,14 @@ class ValidateBilletCodeService {
         };
       }
 
-      throw new Error("Billet code invalid!");
+      throw new Error("Code is invalid!");
     }
 
     const dvFieldTwo = parseInt(code.substr(20, 1));
     const validateFieldTwo = validateField(code.substr(10, 10), 1, dvFieldTwo);
 
     if (!validateFieldTwo) {
-      throw new Error("Billet code invalid!");
+      throw new Error("Code is invalid!");
     }
 
     const dvFieldTree = parseInt(code.substr(31, 1));
@@ -86,7 +86,7 @@ class ValidateBilletCodeService {
     );
 
     if (!validateFieldThree) {
-      throw new Error("Billet code invalid!");
+      throw new Error("Code is invalid!");
     }
 
     const value = code.substr(code.length - 10);
@@ -103,4 +103,4 @@ class ValidateBilletCodeService {
   }
 }
 
-export default ValidateBilletCodeService;
+export default ValidationOfSlipsService;
