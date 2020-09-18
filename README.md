@@ -1,9 +1,7 @@
 his app features all the latest tools and practices in web development!
 
 - :blue_book: **Typescript** — TypeScript provides highly productive development tools for JavaScript IDEs and practices, like static checking.
-- ⚛️ **React Js** — A JavaScript library for building user interfaces
 - 💹 **Node Js** — A open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside a web brows
-- 📄 **Typescript** — TypeScript adds optional types to JavaScript that support tools for large-scale JavaScript applications for any browser, for any host, on any OS.
 
 ## Getting started
 
