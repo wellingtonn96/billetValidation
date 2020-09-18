@@ -11,7 +11,7 @@ This app using all the latest features, tools and practices in web development!
 
 1. Clone this repo using `git clone github.com/wellingtonn96/validationOfSlips.git`
 2. Move yourself to the appropriate directory: `cd validationOfSlips/`
-3. Run `yarn install` to install dependencies
+3. Run `yarn install` to install dependences
 
 ### Getting started with the backend server
 
@@ -20,7 +20,9 @@ This app using all the latest features, tools and practices in web development!
 
 ### Validate the slip code
 
-**URL** : `http:/localhost:3333/validateSlip/` **Method** : `POST`
+**URL** : `http:/localhost:3333/validateSlip` **Method** : `POST`
+
+**Data example** This field must be sent.
 
 ```json
 {
