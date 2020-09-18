@@ -31,7 +31,7 @@ function validateField(
   return (sumValues % 10) + dv === 10 ? true : false;
 }
 
-function getDateWithNumberOfTheDays(numDays: number) {
+function getDueDate(numDays: number) {
   const newdate = new Date(1997, 10, 7);
 
   newdate.setDate(newdate.getDate() + numDays);
@@ -50,14 +50,24 @@ function getDateWithNumberOfTheDays(numDays: number) {
 
 class ValidateBilletCodeService {
   public execute(code: string) {
-    if (code.length !== 47) {
-      throw new Error("Billet code invalid!");
-    }
-
     const dvFieldOne = parseInt(code.substr(9, 1));
     const validateFieldOne = validateField(code.substr(0, 9), 2, dvFieldOne);
 
     if (!validateFieldOne) {
+      const dv = parseInt(code.substr(3, 1));
+      const validate = code.substr(0, 44).replace(dv.toString(), "");
+      const validateCode = validateField(validate, 2, dv);
+
+      if (validateCode) {
+        const removeDig = code.substr(11, 1);
+        const value = code.substr(4, 12).replace(removeDig, "");
+        const formatValue = formattedValue(value);
+        return {
+          value: formatValue,
+          code: code.substr(0, 44),
+        };
+      }
+
       throw new Error("Billet code invalid!");
     }
 
@@ -69,29 +79,21 @@ class ValidateBilletCodeService {
     }
 
     const dvFieldTree = parseInt(code.substr(31, 1));
-    const validateFieldTree = validateField(
+    const validateFieldThree = validateField(
       code.substr(21, 10),
       1,
       dvFieldTree
     );
 
-    if (!validateFieldTree) {
+    if (!validateFieldThree) {
       throw new Error("Billet code invalid!");
     }
 
     const value = code.substr(code.length - 10);
-
-    const firstEightNumbers = value.toString().substr(0, 8);
-
-    const decimal = code.substr(code.length - 2);
-
-    const valueWithDot = `${firstEightNumbers}.${decimal}`;
-
-    const formatValue = formattedValue(valueWithDot);
+    const formatValue = formattedValue(value);
 
     const days = parseInt(code.substr(33, 4));
-
-    const dueDate = getDateWithNumberOfTheDays(days);
+    const dueDate = getDueDate(days);
 
     return {
       dueDate,
