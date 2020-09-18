@@ -1,3 +1,7 @@
+<h1 align="center">
+Validation Of Slips
+</h1>
+
 This app using all the latest features, tools and practices in web development!
 
 - :blue_book: **Typescript** — TypeScript provides highly productive development tools for JavaScript IDEs and practices, like static checking.
@@ -5,7 +9,7 @@ This app using all the latest features, tools and practices in web development!
 
 ## Getting started
 
-1. Clone this repo using `git clone github.com/wellingtonn96/ validationOfSlips.git`
+1. Clone this repo using `git clone github.com/wellingtonn96/validationOfSlips.git`
 2. Move yourself to the appropriate directory: `cd validationOfSlips/`
 3. Run `yarn install` to install dependencies
 
@@ -13,3 +17,11 @@ This app using all the latest features, tools and practices in web development!
 
 1. Move yourself to the server folder: `cd src/`
 2. Run `yarn dev:server` to start the server
+
+### Getting started with the backend server
+
+method POST http:localhost3333/validateSlip
+
+{
+"code": "34191091646992531293183035710009183850000038352"
+}
