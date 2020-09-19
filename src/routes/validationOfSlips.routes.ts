@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import BilletController from "../controllers/ValidationOfSlipsController";
+import ValidationOfSlipsController from "../controllers/ValidationOfSlipsController";
 
-const billetController = new BilletController();
+const validationOfSlipsController = new ValidationOfSlipsController();
 
-const billetRouter = Router();
+const validationOfSlipsRouter = Router();
 
-billetRouter.post("/", billetController.create);
+validationOfSlipsRouter.post("/", validationOfSlipsController.create);
 
-export default billetRouter;
+export default validationOfSlipsRouter;

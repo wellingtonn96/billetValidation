@@ -45,7 +45,9 @@ function getDueDate(numDays: number) {
     y = y - 1;
   }
 
-  return `${dd}/${mm}/${y}`;
+  return `${
+    dd < 10 ? `0${dd}`.substring(0, 2) : dd.toString().substring(0, 2)
+  }/${mm < 10 ? `0${mm}`.substring(0, 2) : mm.toString().substring(0, 2)}/${y}`;
 }
 
 class ValidationOfSlipsService {
