@@ -1,6 +1,7 @@
 <h1 align="center">
 Validation Of Slips
 </h1>
+REST API NodeJS to validate the digitizable line of bank slips.
 
 This app using all the latest features, tools and practices in web development!
 
