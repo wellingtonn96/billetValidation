@@ -31,7 +31,7 @@ function validateField(
   return (sumValues % 10) + dv === 10 ? true : false;
 }
 
-function getDueDate(numDays: number) {
+function getExpirationDate(numDays: number) {
   const newdate = new Date(1997, 10, 7);
 
   newdate.setDate(newdate.getDate() + numDays);
@@ -47,60 +47,60 @@ function getDueDate(numDays: number) {
 
   return `${
     dd < 10 ? `0${dd}`.substring(0, 2) : dd.toString().substring(0, 2)
-  }/${mm < 10 ? `0${mm}`.substring(0, 2) : mm.toString().substring(0, 2)}/${y}`;
+  }-${mm < 10 ? `0${mm}`.substring(0, 2) : mm.toString().substring(0, 2)}-${y}`;
 }
 
 class ValidationOfSlipsService {
-  public execute(code: string) {
-    const dvFieldOne = parseInt(code.substr(9, 1));
-    const validateFieldOne = validateField(code.substr(0, 9), 2, dvFieldOne);
+  public execute(barCode: string) {
+    const dvFieldOne = parseInt(barCode.substr(9, 1));
+    const validateFieldOne = validateField(barCode.substr(0, 9), 2, dvFieldOne);
 
     if (!validateFieldOne) {
-      const dv = parseInt(code.substr(3, 1));
-      const validate = code.substr(0, 44).replace(dv.toString(), "");
+      const dv = parseInt(barCode.substr(3, 1));
+      const validate = barCode.substr(0, 44).replace(dv.toString(), "");
       const validateCode = validateField(validate, 2, dv);
 
       if (validateCode) {
-        const removeDig = code.substr(11, 1);
-        const value = code.substr(4, 12).replace(removeDig, "");
+        const removeDig = barCode.substr(11, 1);
+        const value = barCode.substr(4, 12).replace(removeDig, "");
         const formatValue = formattedValue(value);
         return {
           value: formatValue,
-          code: code.substr(0, 44),
+          barCode: barCode.substr(0, 44),
         };
       }
 
-      throw new Error("Code is invalid!");
+      throw new Error("bar code is invalid!");
     }
 
-    const dvFieldTwo = parseInt(code.substr(20, 1));
-    const validateFieldTwo = validateField(code.substr(10, 10), 1, dvFieldTwo);
+    const dvFieldTwo = parseInt(barCode.substr(20, 1));
+    const validateFieldTwo = validateField(barCode.substr(10, 10), 1, dvFieldTwo);
 
     if (!validateFieldTwo) {
-      throw new Error("Code is invalid!");
+      throw new Error("bar code is invalid!");
     }
 
-    const dvFieldTree = parseInt(code.substr(31, 1));
+    const dvFieldTree = parseInt(barCode.substr(31, 1));
     const validateFieldThree = validateField(
-      code.substr(21, 10),
+      barCode.substr(21, 10),
       1,
       dvFieldTree
     );
 
     if (!validateFieldThree) {
-      throw new Error("Code is invalid!");
+      throw new Error("bar code is invalid!");
     }
 
-    const value = code.substr(code.length - 10);
+    const value = barCode.substr(barCode.length - 10);
     const formatValue = formattedValue(value);
 
-    const days = parseInt(code.substr(33, 4));
-    const dueDate = getDueDate(days);
+    const days = parseInt(barCode.substr(33, 4));
+    const expirationDate = getExpirationDate(days);
 
     return {
-      dueDate,
-      value: formatValue,
-      code,
+      barCode,
+      amount: formatValue,
+      expirationDate,
     };
   }
 }

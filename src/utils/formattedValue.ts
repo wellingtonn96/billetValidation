@@ -4,10 +4,7 @@ export const formattedValue = (value: string): string => {
   const decimal = value.substr(value.length - 2);
 
   const valueWithDot = `${firstEightNumbers}.${decimal}`;
-  const formatedValue = new Intl.NumberFormat("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  }).format(parseFloat(valueWithDot));
+  const formatedValue = parseFloat(valueWithDot).toString();
 
   return formatedValue;
 };

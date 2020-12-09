@@ -6,6 +6,6 @@ const validationOfSlipsController = new ValidationOfSlipsController();
 
 const validationOfSlipsRouter = Router();
 
-validationOfSlipsRouter.post("/", validationOfSlipsController.create);
+validationOfSlipsRouter.get("/:barCode", validationOfSlipsController.create);
 
 export default validationOfSlipsRouter;

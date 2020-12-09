@@ -4,6 +4,6 @@ const routes = Router();
 
 import ValidationOfSlipsRouter from "./validationOfSlips.routes";
 
-routes.use("/validateSlip", ValidationOfSlipsRouter);
+routes.use("/boleto", ValidationOfSlipsRouter);
 
 export default routes;

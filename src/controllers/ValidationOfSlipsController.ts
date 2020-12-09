@@ -4,11 +4,11 @@ import ValidationOfSlipsService from "../services/ValidationOfSlipsService";
 class ValidationOfSlipsController {
   public create(request: Request, response: Response) {
     try {
-      const { code } = request.body;
+      const { barCode } = request.params;
 
       const validateBillet = new ValidationOfSlipsService();
 
-      const billet = validateBillet.execute(code);
+      const billet = validateBillet.execute(barCode);
 
       return response.json(billet);
     } catch (err) {
