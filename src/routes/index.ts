@@ -2,8 +2,8 @@ import { Router } from "express";
 
 const routes = Router();
 
-import ValidationOfSlipsRouter from "./validationOfSlips.routes";
+import validationBarCodeRouter from "./validationBarCode.routes";
 
-routes.use("/boleto", ValidationOfSlipsRouter);
+routes.use("/boleto", validationBarCodeRouter);
 
 export default routes;

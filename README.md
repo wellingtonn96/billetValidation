@@ -10,8 +10,8 @@ This app using all the latest features, tools and practices in web development!
 
 ## Getting started
 
-1. Clone this repo using `git clone github.com/wellingtonn96/validationOfSlips.git`
-2. Move yourself to the appropriate directory: `cd validationOfSlips/`
+1. Clone this repo using `git clone github.com/wellingtonn96/validation-bar-code.git`
+2. Move yourself to the appropriate directory: `cd validation-bar-code/`
 3. Run `yarn install` to install dependences
 
 ### Getting started with the backend server
@@ -19,25 +19,18 @@ This app using all the latest features, tools and practices in web development!
 1. Move yourself to the server folder: `cd src/`
 2. Run `yarn dev:server` to start the server
 
-### Validate the slip code
+### Validate the bar code
 
-**URL** : `http:/localhost:3333/validateSlip` **Method** : `POST`
+**URL** : `http://localhost:8080/boleto/34191091646992531293183035710009110110000032152` **Method** : `GET`
 
-**Data example** This field must be sent.
-
-```json
-{
-  "code": "34191091646992531293183035710009183850000038352"
-}
-```
 
 ## Success Response
 
 ```json
 {
-  "dueDate": "22/9/2020",
-  "value": "R$383.52",
-  "code": "34191091646992531293183035710009183850000038352"
+  "barCode": "34191091646992531293183035710009110110000032152",
+  "amount": "321.52",
+  "expirationDate": "14-07-2000"
 }
 ```
 
@@ -45,6 +38,6 @@ This app using all the latest features, tools and practices in web development!
 
 ```json
 {
-  "erro": "Code is invalid!"
+  "erro": "bar code is invalid!"
 }
 ```
