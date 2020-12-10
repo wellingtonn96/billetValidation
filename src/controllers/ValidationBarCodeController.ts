@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import ValidationBarCodeService from "../services/ValidationBarCodeService";
+import ValidateBarCodeService from "../services/ValidateBarCodeService";
 
 class ValidationBarCodeController {
   public create(request: Request, response: Response) {
     try {
       const { barCode } = request.params;
 
-      const validateBarCode = new ValidationBarCodeService();
+      const validateBarCode = new ValidateBarCodeService();
 
       const validation = validateBarCode.execute(barCode);
 

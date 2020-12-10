@@ -1,5 +1,5 @@
 <h1 align="center">
-Validation Of Slips
+Validation Bar Code
 </h1>
 <p align="center">REST API NodeJS to validate the digitizable line of bank slips.</p>
 
@@ -26,6 +26,8 @@ This app using all the latest features, tools and practices in web development!
 
 ## Success Response
 
+**status** : `200`
+
 ```json
 {
   "barCode": "34191091646992531293183035710009110110000032152",
@@ -35,6 +37,8 @@ This app using all the latest features, tools and practices in web development!
 ```
 
 ## Error Responses
+
+**status** : `400`
 
 ```json
 {
