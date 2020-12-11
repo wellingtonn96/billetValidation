@@ -45,3 +45,7 @@ This app using all the latest features, tools and practices in web development!
   "erro": "bar code is invalid!"
 }
 ```
+
+## Testing the application
+
+- Test the application with the command `yarn test`

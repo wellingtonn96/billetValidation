@@ -1,3 +1,4 @@
+import validationBarCodeRoutes from "../routes/validationBarCode.routes";
 import { formattedValue } from "../utils/formattedValue";
 
 class ValidateBarCodeRepository {
@@ -53,7 +54,7 @@ class ValidateBarCodeRepository {
     return (sumValues % 10) + dv === 10 ? true : false;
   }
 
-  public validateBarCodeFields(barCode: string): boolean {
+  public validateBankBondsBarCode(barCode: string): boolean {
     const dvFieldOne = parseInt(barCode.substr(9, 1));
     const validateFieldOne = this.validateOneFieldBarCode(barCode.substr(0, 9), 2, dvFieldOne);
 
@@ -82,6 +83,51 @@ class ValidateBarCodeRepository {
     return true;
   }
 
+  public validateDealershipPaymentsBarCode(barCode: string): boolean {
+    const dvFieldOne = parseInt(barCode.substr(11, 1));
+    
+    const validateFieldOne = this.validateOneFieldBarCode(barCode.substr(0, 11), 2, dvFieldOne);
+
+
+    if (!validateFieldOne) {
+     return validateFieldOne;
+    }
+
+    const dvFieldTwo = parseInt(barCode.substr(23, 1));
+    const validateFieldTwo = this.validateOneFieldBarCode(barCode.substr(12, 11), 2, dvFieldTwo);
+    
+    if (!validateFieldTwo) {
+      return validateFieldTwo;
+    }
+    
+    const dvFieldTree = parseInt(barCode.substr(35, 1));
+    const validateFieldThree = this.validateOneFieldBarCode(
+      barCode.substr(24, 11),
+      2,
+      dvFieldTree
+      );
+
+    if (!validateFieldThree) {
+     return validateFieldThree;
+    }
+
+    const dvFieldFour = parseInt(barCode.substr(47, 1));
+    const validateFieldFour = this.validateOneFieldBarCode(
+      barCode.substr(36, 11),
+      2,
+      dvFieldFour
+    );
+
+    console.log(validateFieldFour)
+
+    if (!validateFieldFour) {
+     return validateFieldFour;
+    }
+
+
+    return true;
+  }
+
   public getAmmoutValue(barCode: string) {
     const value = barCode.substr(barCode.length - 10);
     const formatValue = formattedValue(value);
@@ -91,18 +137,3 @@ class ValidateBarCodeRepository {
 }
 
 export { ValidateBarCodeRepository }
-
-
-// const dv = parseInt(barCode.substr(3, 1));
-// const validate = barCode.substr(0, 44).replace(dv.toString(), "");
-// const validateCode = validateField(validate, 2, dv);
-
-// if (validateCode) {
-//   const removeDig = barCode.substr(11, 1);
-//   const value = barCode.substr(4, 12).replace(removeDig, "");
-//   const formatValue = formattedValue(value);
-//   return {
-//     value: formatValue,
-//     barCode: barCode.substr(0, 44),
-//   };
-// }

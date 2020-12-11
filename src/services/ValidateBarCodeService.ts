@@ -1,14 +1,22 @@
 import { ValidateBarCodeRepository } from "../repositories/ValidateBarCodeRepository";
 
 
-class ValidationBarCodeService {
+class ValidateBarCodeService {
   public execute(barCode: string) {
     const validateBarCodeRepository = new ValidateBarCodeRepository();
 
-    const validateCode = validateBarCodeRepository.validateBarCodeFields(barCode);
+    const validateBankBondsBarCode = validateBarCodeRepository.validateBankBondsBarCode(barCode);
 
-    if (!validateCode) {
-      throw new Error("bar code is invalid!");
+    if (!validateBankBondsBarCode) {
+      const validateDealershipPaymentsBarCode = validateBarCodeRepository.validateDealershipPaymentsBarCode(barCode)
+
+      if(!validateDealershipPaymentsBarCode) {
+        throw new Error("bar code is invalid!");
+      }
+
+      return {
+        barCode
+      }
     }
 
     const amount = validateBarCodeRepository.getAmmoutValue(barCode);
@@ -23,4 +31,4 @@ class ValidationBarCodeService {
   }
 }
 
-export default ValidationBarCodeService;
+export default ValidateBarCodeService;
